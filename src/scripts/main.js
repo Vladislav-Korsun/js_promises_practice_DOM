@@ -62,10 +62,7 @@ const thirdPromise = new Promise((resolve) => {
     if (leftClicked && rightClicked) {
       document.removeEventListener('click', onClick);
 
-      resolve(
-        'Third promise was resolved only after',
-        'both left and right clicks happened',
-      );
+      resolve('Third promise was resolved');
     }
   }
 
