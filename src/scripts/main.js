@@ -15,19 +15,20 @@ function showError(message) {
   div.dataset.qa = 'notification';
   div.className = 'error';
   div.textContent = message;
-  document.body.appendChild('div');
+
+  document.body.appendChild(div);
 }
 
 const firstPromise = new Promise((resolve, reject) => {
   const timerId = setTimeout(() => {
-    reject(new Error('First promise was rejected in 3 seconds if not clicked'));
+    reject(new Error('First promise was rejected'));
   }, 3000);
 
   function onClick(events) {
     if (events.button === 0) {
       clearTimeout(timerId);
       document.removeEventListener('click', onClick);
-      resolve('First promise was resolved on a left click in the document');
+      resolve('First promise was resolved');
     }
   }
 
@@ -62,8 +63,8 @@ const thirdPromise = new Promise((resolve) => {
       document.removeEventListener('click', onClick);
 
       resolve(
-        'Third promise was resolved',
-        'only after both left and right clicks happened',
+        'Third promise was resolved only after',
+        'both left and right clicks happened',
       );
     }
   }
@@ -71,6 +72,6 @@ const thirdPromise = new Promise((resolve) => {
   document.addEventListener('click', onClick);
 });
 
-firstPromise.then(showSuccess).catch((error) => showError(error.message));
+firstPromise.then(showSuccess).catch((err) => showError(err.message));
 secondPromise.then(showSuccess);
 thirdPromise.then(showSuccess);
